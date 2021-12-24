@@ -4,7 +4,6 @@ import crud.models.User;
 import crud.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +39,6 @@ public class UserController {
     }
 
     @PostMapping()
-    @Transactional
     public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "userPage/userCreate";
@@ -55,9 +53,7 @@ public class UserController {
         return "userPage/userEdit";
     }
 
-//    @PatchMapping("/{id}")
-    @PostMapping("/{id}")
-    @Transactional
+    @PatchMapping("/{id}")
     public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
                              @PathVariable("id") long id) {
         if (bindingResult.hasErrors()) {
@@ -67,9 +63,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-//    @DeleteMapping("/{id}")
-    @PostMapping("/{id}/delete")
-    @Transactional
+    @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(id);
         return "redirect:/users";
