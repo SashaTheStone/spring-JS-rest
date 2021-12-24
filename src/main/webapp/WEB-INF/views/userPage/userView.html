@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Конкретный пользователь</title>
+</head>
+<body>
+    Текущий пользователь:
+    <p th:text="${user.getName()}">userName</p>
+    <p th:text="${user.getLastName()}">userLastName</p>
+    <p th:text="${user.getAge()}">userAge</p>
+
+
+    <br>
+    <a th:href="@{/users/{id}/edit(id=${user.getId()})}">Изменить</a>
+    <br>
+    <br>
+    <form th:method="DELETE" th:action="@{/users/{id}/delete(id=${user.getId()})}">
+        <input type="submit" value="Удалить"/>
+    </form>
+    <br>
+    <hr>
+    <a href="/users">Вернуться к списку пользователей</a>
+
+</body>
+</html>
