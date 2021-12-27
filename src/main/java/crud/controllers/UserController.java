@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping()
 public class UserController {
 
     private final UserService userService;
@@ -21,52 +21,58 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping("/admin")
     public String userList(Model model){
         model.addAttribute("users", userService.getAllUsers());
         return "userPage/usersList";
     }
 
-    @GetMapping("/{id}")
-    public String showUser(@PathVariable("id") long id, Model model){
-        model.addAttribute("user", userService.readUserByID(id));
-        return "userPage/userView";
+    @GetMapping("/user")
+    public String currentUser(Model model){
+//        model.addAttribute("users", userService.getAllUsers());
+        return "userPage/userInfo";
     }
 
-    @GetMapping("/new")
+    @GetMapping("/admin/{id}")
+    public String UserInfo(@PathVariable("id") long id, Model model){
+        model.addAttribute("user", userService.readUserByID(id));
+        return "userPage/userInfoAdmin";
+    }
+
+    @GetMapping("/admin/new")
     public String newUser(@ModelAttribute("user") User user){
         return "userPage/userCreate";
     }
 
-    @PostMapping()
+    @PostMapping("/admin")
     public String create(@ModelAttribute("user") @Valid User user, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "userPage/userCreate";
         }
         userService.createUser(user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("/admin/{id}/edit")
     public String editUser(Model model, @PathVariable("id") long id){
         model.addAttribute("user", userService.readUserByID(id));
-        return "userPage/userEdit";
+        return "userPage/userUpdate";
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/admin/{id}")
     public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
                              @PathVariable("id") long id) {
         if (bindingResult.hasErrors()) {
-            return "userPage/userEdit";
+            return "userPage/userUpdate";
         }
         userService.updateUser(id,user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("admin/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(id);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
 }

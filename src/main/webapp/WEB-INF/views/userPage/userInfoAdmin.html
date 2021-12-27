@@ -12,15 +12,19 @@
 
 
     <br>
-    <a th:href="@{/users/{id}/edit(id=${user.getId()})}">Изменить</a>
+    <a th:href="@{/admin/{id}/edit(id=${user.getId()})}">Изменить</a>
     <br>
     <br>
-    <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+    <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
         <input type="submit" value="Удалить"/>
     </form>
     <br>
     <hr>
-    <a href="/users">Вернуться к списку пользователей</a>
+    <a href="/admin">Вернуться к списку пользователей</a>
 
+    <br>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout" />
+    </form>
 </body>
 </html>

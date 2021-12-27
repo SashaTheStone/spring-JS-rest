@@ -9,7 +9,7 @@
 Введите данные для регистрации:
 <br>
 
-<form th:method="POST" th:action="@{/users}" th:object="${user}" >
+<form th:method="POST" th:action="@{/admin}" th:object="${user}" >
     <label for="name">Имя пользователя:</label>
     <input type="text" th:field="*{name}" id="name"/>
     <div style="color: brown" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка имени</div>
@@ -30,7 +30,12 @@
 
 <br>
 <hr>
-<a href="/users">Вернуться к списку пользователей</a>
+<a href="/admin">Вернуться к списку пользователей</a>
+
+<br>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout" />
+</form>
 
 </body>
 </html>
