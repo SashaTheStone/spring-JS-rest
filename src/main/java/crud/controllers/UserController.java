@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping()
@@ -28,8 +29,8 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public String currentUser(Model model){
-//        model.addAttribute("users", userService.getAllUsers());
+    public String currentUser(Principal principal, Model model){
+        model.addAttribute("user", userService.getUserByEmail(principal.getName()));
         return "userPage/userInfo";
     }
 

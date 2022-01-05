@@ -10,6 +10,13 @@
 <br>
 
 <form th:method="POST" th:action="@{/admin}" th:object="${user}" >
+
+
+    <label for="age">Email пользователя</label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <div style="color: brown" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Ошибка возраста</div>
+    <br>
+
     <label for="name">Имя пользователя:</label>
     <input type="text" th:field="*{name}" id="name"/>
     <div style="color: brown" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка имени</div>
@@ -23,6 +30,11 @@
     <label for="age">Возраст пользователя:</label>
     <input type="text" th:field="*{age}" id="age"/>
     <div style="color: brown" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Ошибка возраста</div>
+    <br>
+
+    <label for="age">Пароль пользователя:</label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <div style="color: brown" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Ошибка возраста</div>
     <br>
 
     <input type="submit" value="Добавить пользователя"/>

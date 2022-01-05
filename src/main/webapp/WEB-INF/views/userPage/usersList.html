@@ -8,15 +8,13 @@
 Список зарегистрированных пользователей:
 <div>
     <div th:each="user : ${users}">
-     <a th:href="@{/admin/{id}(id=${user.getId()})}" th:text="${user.getName()}">userName</a>
+     <a th:href="@{/admin/{id}(id=${user.getId()})}" th:text="${user.getEmail()}">Email</a>
     </div>
 
     <br>
     <br>
     <a href="/admin/new">Создать пользователя</a>
     <br>
-    <hr>
-    <a href="/">Перейти к стартовой странице</a>
 </div>
 <br>
 <form th:action="@{/logout}" method="post">

@@ -5,7 +5,12 @@
     <title>Информация о текущем пользователе</title>
 </head>
 <body>
-    Иванов иван
+    Информация о текущем пользователе:
+    <p th:text="${user.getEmail()}">Email</p>
+    <p th:text="${user.getName()}">userName</p>
+    <p th:text="${user.getLastName()}">userLastName</p>
+    <p th:text="${user.getAge()}">userAge</p>
+    <p th:text="${user.getPassword()}">userPassword</p>
 
     <br>
     <form th:action="@{/logout}" method="post">

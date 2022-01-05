@@ -5,10 +5,12 @@
     <title>Конкретный пользователь</title>
 </head>
 <body>
-    Текущий пользователь:
+    Информация о пользователе:
+    <p th:text="${user.getEmail()}">Email</p>
     <p th:text="${user.getName()}">userName</p>
     <p th:text="${user.getLastName()}">userLastName</p>
     <p th:text="${user.getAge()}">userAge</p>
+    <p th:text="${user.getPassword()}">userPassword</p>
 
 
     <br>

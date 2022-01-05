@@ -9,6 +9,17 @@
 <br>
 
 <form th:method="PATCH" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
+
+    <label for="email">Почта пользователя:</label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <div style="color: brown" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Ошибка почты</div>
+    <br>
+
+    <label for="password">Пароль пользователя:</label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <div style="color: brown" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Ошибка пароля</div>
+    <br>
+
     <label for="name">Имя пользователя:</label>
     <input type="text" th:field="*{name}" id="name"/>
     <div style="color: brown" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка имени</div>
