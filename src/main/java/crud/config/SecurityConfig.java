@@ -1,13 +1,11 @@
-package crud.config.security;
+package crud.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -15,20 +13,21 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailsService userDetailsService;
-    private final LoginSuccessHandler successUserHandler;
+    private UserDetailsService userDetailService;
+    private LoginSuccessHandler successUserHandler;
+    private PasswordEncoder passwordEncoder;
 
-    public SecurityConfig(UserDetailsService userDetailsService, LoginSuccessHandler successUserHandler) {
-        this.userDetailsService = userDetailsService;
+    public SecurityConfig(UserDetailsService userDetailService, LoginSuccessHandler successUserHandler, PasswordEncoder passwordEncoder) {
+        this.userDetailService = userDetailService;
         this.successUserHandler = successUserHandler;
+        this.passwordEncoder = passwordEncoder;
     }
-
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
 //        auth.inMemoryAuthentication().withUser("USER").password("USER").roles("USER");
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder);
     }
 
     @Override
@@ -51,11 +50,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").access("hasAnyRole('ROLE_ADMIN')")
                 .anyRequest()
                 .authenticated();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
     }
 
 }

@@ -2,7 +2,6 @@ package crud.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -35,7 +34,7 @@ public class User implements UserDetails {
     private byte age;
 
     @Column(name = "email", unique=true)
-    @Email
+    @Email(message = "Неверный формат адреса почты")
     @NotEmpty(message = "Имя  не должно быть пустым")
     private String email;
 

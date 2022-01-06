@@ -10,13 +10,12 @@ public class HomeController {
 
     @GetMapping("/")
     public String helloPage() {
-            return "homePage/homeview";
+            return "views/homePage/homeView";
         }
 
     @GetMapping("/login")
     public String loginPage() {
-        return "homePage/login";
+        return "views/homePage/login";
     }
-
 
 }
