@@ -2,6 +2,7 @@ package crud.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
+import java.util.Locale;
 import java.util.Set;
 
 @Entity
@@ -13,7 +14,7 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "role")
+    @Column(name = "role", unique=true)
     private String role;
 
     @ManyToMany(mappedBy = "roles")
@@ -55,5 +56,11 @@ public class Role implements GrantedAuthority {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        String updRole = getRole().replaceAll("ROLE_", "");;
+        return updRole;
     }
 }
