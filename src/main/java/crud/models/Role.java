@@ -1,5 +1,6 @@
 package crud.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import java.util.Locale;
@@ -17,6 +18,9 @@ public class Role implements GrantedAuthority {
     @Column(name = "role", unique=true)
     private String role;
 
+
+    @Transient
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
