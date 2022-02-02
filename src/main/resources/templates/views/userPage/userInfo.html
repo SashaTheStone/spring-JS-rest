@@ -12,11 +12,11 @@
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="text-white text-left">
-        <b th:text="${user.getEmail()}">Current user</b>
-        with roles:
-        <th:block th:each="aaa : ${user.getRoles()}">
-            <t1 th:text="${aaa}">User Roles</t1>
-        </th:block>
+        <b id="NameNavBar"></b> with roles: <b id="RoleNavBar"></b>
+<!--        <b th:text="${user.getEmail()}">Current user</b>-->
+<!--        <th:block th:each="aaa : ${user.getRoles()}">-->
+<!--            <t1 th:text="${aaa}">User Roles</t1>-->
+<!--        </th:block>-->
     </div>
     <div class="text-white text-right">
         <form th:action="@{/logout}" method="post">
@@ -60,12 +60,18 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td th:text="${user.getId()}">ID</td>
-                        <td th:text="${user.getName()}">First Name</td>
-                        <td th:text="${user.getLastName()}">Last Name</td>
-                        <td th:text="${user.getAge()}">Age</td>
-                        <td th:text="${user.getEmail()}">Email</td>
-                        <td th:text="${user.getRoles()}">Roles</td>
+                        <td id="tdUserId"></td>
+                        <td id="tdUserName"></td>
+                        <td id="tdUserLastName"></td>
+                        <td id="tdUserAge"></td>
+                        <td id="tdUserEmail"></td>
+                        <td id="tdUserRole"></td>
+<!--                        <td th:text="${user.getId()}">ID</td>-->
+<!--                        <td th:text="${user.getName()}">First Name</td>-->
+<!--                        <td th:text="${user.getLastName()}">Last Name</td>-->
+<!--                        <td th:text="${user.getAge()}">Age</td>-->
+<!--                        <td th:text="${user.getEmail()}">Email</td>-->
+<!--                        <td th:text="${user.getRoles()}">Roles</td>-->
                     </tr>
                     </tbody>
                 </table>
@@ -85,5 +91,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
+<script src="userInfo.js"></script>
 </body>
 </html>

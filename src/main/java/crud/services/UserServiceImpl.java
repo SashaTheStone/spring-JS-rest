@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User readUserByID(long id) {
+    public User getUserByID(long id) {
         return userRepository.findById(id).get();
     }
 
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void deleteUser(long id) {
-        userRepository.delete(readUserByID(id));
+        userRepository.delete(getUserByID(id));
     }
 
     public User getUserByEmail (String email){
@@ -53,8 +53,7 @@ public class UserServiceImpl implements UserService{
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(s).get();
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(), user.isEnabled(), user.isAccountNonExpired(),user.isCredentialsNonExpired(),
-                user.isAccountNonLocked(), user.getAuthorities().stream().map(
-                        roles -> new SimpleGrantedAuthority(roles.getAuthority())).collect(Collectors.toSet()));
+                user.getPassword(), user.getAuthorities().stream()
+                .map(roles -> new SimpleGrantedAuthority(roles.getAuthority())).collect(Collectors.toSet()));
     }
 }

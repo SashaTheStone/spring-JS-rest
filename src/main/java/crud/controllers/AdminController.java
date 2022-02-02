@@ -56,7 +56,7 @@ public class AdminController {
     public String updateUser(@ModelAttribute("newUser") User user, @RequestParam("userRolesID") Long[] roleList,
                              BindingResult bindingResult, @PathVariable("id") long id) {
         if (bindingResult.hasErrors()) {
-            return "views/userPage/userUpdate";
+            return "views/userPage/usersList";
         }
         user.setRoles(Arrays.stream(roleList).map(roleService::readRoleByID).collect(Collectors.toSet()));
         userService.updateUser(id,user);
