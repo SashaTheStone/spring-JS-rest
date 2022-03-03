@@ -1,15 +1,13 @@
 package crud.controllers;
 
+import crud.models.Role;
 import crud.models.User;
 import crud.services.RoleService;
 import crud.services.UserService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
@@ -26,9 +24,8 @@ public class MyRestController {
     }
 
     @GetMapping("/users")
-    public List<User> userList(){
-        List<User> allUsers = userService.getAllUsers();
-        return allUsers;
+    public ResponseEntity<List<User>> allUsers(){
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/users/{id}")
@@ -42,4 +39,27 @@ public class MyRestController {
         return new ResponseEntity<>(userService.getUserByEmail(principal.getName()), HttpStatus.OK);
     }
 
+    @PostMapping("/save")
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
+        HttpHeaders headers = new HttpHeaders();
+        userService.saveUser(user);
+        return new ResponseEntity<>(user, headers, HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/change")
+    public ResponseEntity<User> updateUser(@RequestBody User user) {
+        HttpHeaders headers = new HttpHeaders();
+        userService.updateUser(user.getId(), user);
+        return new ResponseEntity<>(user, headers, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteUser(@PathVariable("id") long id) {
+        userService.deleteUser(id);
+    }
+
+    @GetMapping("/roles")
+    public ResponseEntity<List<Role>> getAllRoles() {
+        return new ResponseEntity<>(roleService.getAllRoles(), HttpStatus.OK);
+    }
 }

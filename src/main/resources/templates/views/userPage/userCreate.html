@@ -9,14 +9,13 @@
 
 </head>
 <body>
-
 <nav class="navbar navbar-dark bg-dark">
     <div class="text-white text-left">
-        <b th:text="${user.getEmail()}">Current user</b>
-        with roles:
-        <th:block th:each="aaa : ${user.getRoles()}">
-            <t1 th:text="${aaa}">User Roles</t1>
-        </th:block>
+        <b id="NameNavBar"></b> with roles: <t1 id="RoleNavBar"></t1>
+        <!--        <b th:text="${user.getEmail()}">Current user</b>-->
+        <!--        <th:block th:each="aaa : ${user.getRoles()}">-->
+        <!--            <t1 th:text="${aaa}">User Roles</t1>-->
+        <!--        </th:block>-->
     </div>
     <div class="text-white text-right">
         <form th:action="@{/logout}" method="post">
@@ -24,6 +23,21 @@
         </form>
     </div>
 </nav>
+
+<!--<nav class="navbar navbar-dark bg-dark">-->
+<!--    <div class="text-white text-left">-->
+<!--        <b th:text="${user.getEmail()}">Current user</b>-->
+<!--        with roles:-->
+<!--        <th:block th:each="aaa : ${user.getRoles()}">-->
+<!--            <t1 th:text="${aaa}">User Roles</t1>-->
+<!--        </th:block>-->
+<!--    </div>-->
+<!--    <div class="text-white text-right">-->
+<!--        <form th:action="@{/logout}" method="post">-->
+<!--            <input class="form-control-plaintext text-secondary" type="submit" value="Logout"/>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</nav>-->
 <div class="container-fluid">
     <div class="row ">
         <div class="col-2">
@@ -61,59 +75,75 @@
                     <div class="card-body">
 
                         <div class="row justify-content-center">
-                            <form class="col-4 text-center" th:method="POST" th:action="@{/admin}"
-                                  th:object="${newUser}">
+                            <div class="col-4 text-center">
+<!--                            <form class="col-4 text-center" th:method="POST" th:action="@{/admin}"-->
+<!--                                  th:object="${newUser}">-->
                                 <div class="form-group">
-                                    <label class="font-weight-bold" for="name">First name</label>
-                                    <input class="form-control" type="text" th:field="*{name}" id="name"/>
-                                    <small style="color: brown" th:if="${#fields.hasErrors('name')}"
-                                           th:errors="*{name}">Ошибка имени</small>
+                                    <label class="font-weight-bold" for="newFirstName">First name</label>
+                                    <input class="form-control" type="text"id="newFirstName"/>
+<!--                                    <input class="form-control" type="text" th:field="*{name}" id="name"/>-->
+<!--                                    <small style="color: brown" th:if="${#fields.hasErrors('name')}"-->
+<!--                                           th:errors="*{name}">Ошибка имени</small>-->
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="font-weight-bold" for="lastname">Last name</label>
-                                    <input class="form-control" type="text" th:field="*{lastName}" id="lastname"/>
-                                    <small style="color: brown" th:if="${#fields.hasErrors('lastName')}"
-                                           th:errors="*{lastName}">Ошибка фамилии</small>
+                                    <label class="font-weight-bold" for="newSecondName">Last name</label>
+                                    <input class="form-control" type="text"id="newSecondName"/>
+<!--                                    <label class="font-weight-bold" for="lastname">Last name</label>-->
+<!--                                    <input class="form-control" type="text" th:field="*{lastName}" id="lastname"/>-->
+<!--                                    <small style="color: brown" th:if="${#fields.hasErrors('lastName')}"-->
+<!--                                           th:errors="*{lastName}">Ошибка фамилии</small>-->
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="font-weight-bold" for="age">Age</label>
-                                    <input class="form-control" type="text" th:field="*{age}" id="age"/>
-                                    <small style="color: brown" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Ошибка
-                                        возраста
-                                    </small>
+                                    <label class="font-weight-bold" for="newAge">Age</label>
+                                    <input class="form-control" type="text"id="newAge"/>
+<!--                                    <label class="font-weight-bold" for="age">Age</label>-->
+<!--                                    <input class="form-control" type="text" th:field="*{age}" id="age"/>-->
+<!--                                    <small style="color: brown" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Ошибка-->
+<!--                                        возраста-->
+<!--                                    </small>-->
                                 </div>
                                 <div class="form-group">
-                                    <label class="font-weight-bold" for="email">Email</label>
-                                    <input class="form-control" type="text" th:field="*{email}" id="email"/>
-                                    <small style="color: brown" th:if="${#fields.hasErrors('email')}"
-                                           th:errors="*{email}">Ошибка
-                                        возраста
-                                    </small>
+                                    <label class="font-weight-bold" for="newEmail">Email</label>
+                                    <input class="form-control" type="text"id="newEmail"/>
+<!--                                    <label class="font-weight-bold" for="email">Email</label>-->
+<!--                                    <input class="form-control" type="text" th:field="*{email}" id="email"/>-->
+<!--                                    <small style="color: brown" th:if="${#fields.hasErrors('email')}"-->
+<!--                                           th:errors="*{email}">Ошибка-->
+<!--                                        возраста-->
+<!--                                    </small>-->
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="font-weight-bold" for="password">Password</label>
-                                    <input class="form-control" type="password" th:field="*{password}" id="password"/>
+                                    <label class="font-weight-bold" for="newPassword">Password</label>
+                                    <input class="form-control" type="password" id="newPassword"/>
+<!--                                    <label class="font-weight-bold" for="password">Password</label>-->
+<!--                                    <input class="form-control" type="password" th:field="*{password}" id="password"/>-->
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="font-weight-bold" for="selectRoles">Role</label>
-                                    <select multiple size="2" class="form-control" id="selectRoles" name="userRolesID">
-                                        <option th:each="role : ${roles}"
-                                                th:value="${role.getId()}"
-                                                th:text="${role}">
-                                        </option>
+<!--                                <div class="form-group">-->
+<!--                                    <label class="font-weight-bold" for="selectRoles">Role</label>-->
+<!--                                    <select multiple size="2" class="form-control" id="selectRoles" name="selectRoles">-->
+<!--&lt;!&ndash;                                        <option th:each="role : ${roles}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                th:value="${role.getId()}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                th:text="${role}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </option>&ndash;&gt;-->
+<!--                                    </select>-->
+<!--                                </div>-->
+
+                                <div class="custom-select" style="text-align: center;" multiple>
+                                    <label for="selectRoles" class="form-label">Role</label>
+                                    <select multiple size="2" class="form-control" name="selectRoles" id="selectRoles">
                                     </select>
                                 </div>
-
                                 <p></p>
 
-                                <button class="btn btn-success" type="submit" value="Add new user"/>
+                                <button class="btn btn-success" id="createButton" type="submit" value="Add new user"/>
                                 Add new user</button>
 
-                            </form>
+                            </div>
+<!--                            </form>-->
 
                         </div>
 
@@ -133,6 +163,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
+<script type="text/javascript" src="/userCreate.js"></script>
 </body>
 </html>
